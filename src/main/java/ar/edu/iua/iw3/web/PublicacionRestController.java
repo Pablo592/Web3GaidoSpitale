@@ -36,7 +36,7 @@ public class PublicacionRestController {
 
 	}
 
-	@GetMapping(value="/publicaciones/publicacionPorNombreUsuario")
+	@GetMapping(value="/publicaciones/publicacion-por-nombre-usuario")
 	public ResponseEntity<List<Publicacion>> listarPublicacionPorNombreUsuario(@RequestParam("nombre") String nombre) {
 		try {
 			return new ResponseEntity<List<Publicacion>>(publicacionNegocio.listarPublicacionPorNombre(nombre), HttpStatus.OK);
@@ -48,7 +48,7 @@ public class PublicacionRestController {
 
 	}
 
-	@GetMapping(value="/publicaciones/publicacionConMasLikes")
+	@GetMapping(value="/publicaciones/publicacion-con-mas-likes")
 	public ResponseEntity<Publicacion> listarPublicacionConMasLikes() {
 		try {
 			return new ResponseEntity<Publicacion>(publicacionNegocio.listarPublicacionConMayorCantidadLikes(), HttpStatus.OK);

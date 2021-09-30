@@ -43,7 +43,7 @@ public class UsuarioRestController {
 	}
 	
 	
-	@GetMapping(value="/usuarios/mayor_seguidores")
+	@GetMapping(value="/usuarios/mayor-seguidores")
 	public ResponseEntity<Usuario> listadoUsuarioConMayorSeguidores()  {
 			try {
 				return new ResponseEntity<Usuario>(usuarioNegocio.findPerfilConMasSeguidores(), HttpStatus.OK);
@@ -55,7 +55,7 @@ public class UsuarioRestController {
 
 	}
 	
-	@GetMapping(value="/usuarios/buscarPorFechaNacimiento")
+	@GetMapping(value="/usuarios/buscar-por-fecha-nacimiento")
 	public ResponseEntity<List<Usuario>> listadoUsuarioPorFechaNacimiento(@RequestParam ("mes") int mes, @RequestParam ("anio")int anio)  {
 			try {
 				return new ResponseEntity<List<Usuario>>(usuarioNegocio.findPerfilPorAnioYMes(anio, mes), HttpStatus.OK);
@@ -68,7 +68,7 @@ public class UsuarioRestController {
 	}
 
 
-	@GetMapping(value="/usuarios/buscarUsuariosPorTituloPublicacion")
+	@GetMapping(value="/usuarios/buscar-usuarios-por-titulo-publicacion")
 	public ResponseEntity<List<Usuario>> listadoUsuariosPorPublicacionTitulo(@RequestParam ("nombre") String nombre)  {
 		try {
 			return new ResponseEntity<List<Usuario>>(usuarioNegocio.findUsuarioByTituloPublicacion(nombre), HttpStatus.OK);
@@ -80,7 +80,7 @@ public class UsuarioRestController {
 
 	}
 
-	@GetMapping(value="/usuarios/buscarPorEmail")
+	@GetMapping(value="/usuarios/buscar-por-email")
 	public ResponseEntity<Usuario> listadoUsuarioPorEmail(@RequestParam ("email") String email)  {
 		try {
 			return new ResponseEntity<Usuario>(usuarioNegocio.findUsuarioPorCorreo(email), HttpStatus.OK);
