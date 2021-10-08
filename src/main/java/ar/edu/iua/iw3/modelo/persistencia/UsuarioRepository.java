@@ -21,6 +21,8 @@ public interface UsuarioRepository extends JpaRepository <Usuario,Long> {
 	List<Usuario> getByYearAndMonth(int anio, int mes);
 
 	List<Usuario> findByIdPublicacionTitulo(String titulo);
+
+	List<Usuario> findUsuarioByIdPublicacionNotNull();
 	
 	
 	

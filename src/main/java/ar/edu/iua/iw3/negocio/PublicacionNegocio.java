@@ -26,6 +26,9 @@ public class PublicacionNegocio implements IPublicacionNegocio {
 	@Autowired
 	private PublicacionRepository publicacionDAO;
 
+	@Autowired
+	private UsuarioNegocio usuarioNegocio;
+
 	@Override
 	public List<Publicacion> listado() throws NegocioException {
 		try {
@@ -130,6 +133,33 @@ public class PublicacionNegocio implements IPublicacionNegocio {
 	}
 
 	@Override
+	public List<Publicacion> findPublicacionDondeCantSuscriptoresMenorCantiLikes() throws NegocioException, NoEncontradoException {
+		List<Publicacion> publicacionList = new ArrayList<>();
+		List <Usuario> usuarioList = new ArrayList<>();
+		List <Publicacion> aux = new ArrayList<>();
+		try {
+			publicacionList = publicacionDAO.findAll();
+			usuarioList = usuarioNegocio.getUsuarioWhenPublicacionIsNotNull();
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+			throw new NegocioException(e);
+		}
+		if (publicacionList.isEmpty()|| usuarioList.isEmpty()) {
+			throw new NoEncontradoException("No hay publicaciones registradas o no hay usuarios registrados");
+		}
+		//tengo todos usuarios que tienen publicaciones
+		//
+		for (Usuario u: usuarioList){
+			long cantLikes = u.getIdPublicacion().getCantLikes();
+			long cantSeguidores = u.getCantSeguidores();
+			if (cantLikes>cantSeguidores)
+				aux.add(u.getIdPublicacion());
+		}
+
+		return aux;
+	}
+
+	/*@Override
 	public List<Publicacion> findPublicacionDondeCantSuscriptoresMenorCantiLikes()
 			throws NegocioException, NoEncontradoException {
 		List<Publicacion> o = new ArrayList<>();
@@ -143,7 +173,7 @@ public class PublicacionNegocio implements IPublicacionNegocio {
 			throw new NoEncontradoException("No hay publicaciones que tengan mas likes que suscriptores");
 		}
 		return o;
-	}
+	}*/
 
 	@Override
 	public List<Publicacion> findPublicacionByFechaPublicacion(int hora)

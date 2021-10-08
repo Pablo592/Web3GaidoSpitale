@@ -28,4 +28,5 @@ public interface IUsuarioNegocio {
 
 	public Usuario findUsuarioPorCorreo(String Email) throws NegocioException, NoEncontradoException;
 
+	public List<Usuario> getUsuarioWhenPublicacionIsNotNull() throws NegocioException;
 }

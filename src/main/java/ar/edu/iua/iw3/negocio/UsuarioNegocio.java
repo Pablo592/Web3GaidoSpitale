@@ -31,6 +31,15 @@ public class UsuarioNegocio  implements IUsuarioNegocio{
 			throw new NegocioException(e);
 		}
 	}
+	@Override
+	public List<Usuario> getUsuarioWhenPublicacionIsNotNull() throws NegocioException {
+		try {
+			return usuarioDAO.findUsuarioByIdPublicacionNotNull();
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+			throw new NegocioException(e);
+		}
+	}
 
 	@Override
 	public Usuario cargar(long id) throws NegocioException, NoEncontradoException {
